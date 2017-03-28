@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="816.0" prefWidth="942.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ejerciciomanejadirectorios.FXMLDocumentController">
+   <children>
+      <Label layoutX="14.0" layoutY="27.0" text="Ruta de Carpeta" />
+      <TextField fx:id="TextFieldRuta" layoutX="130.0" layoutY="23.0" onAction="#ActionTextFieldRuta" prefHeight="25.0" prefWidth="679.0" promptText="Escribe aquí la ruta deseada" />
+      <Button fx:id="ButtonAbrir" layoutX="830.0" layoutY="23.0" mnemonicParsing="false" onAction="#ActionButtonAbrir" text="Abrir" textFill="#a70202">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Separator layoutX="-2.0" layoutY="104.0" prefHeight="0.0" prefWidth="942.0" />
+      <Label layoutX="14.0" layoutY="81.0" text="Selecionar Opción">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Pane layoutX="14.0" layoutY="107.0" prefHeight="198.0" prefWidth="896.0">
+         <children>
+            <RadioButton fx:id="ListarContenido" layoutX="22.0" layoutY="14.0" mnemonicParsing="false" onAction="#ActionOpciones" text="1. Listar el contenido del directorio" />
+            <RadioButton fx:id="ListarFiltrado" layoutX="22.0" layoutY="50.0" mnemonicParsing="false" onAction="#ActionOpciones" prefHeight="17.0" prefWidth="174.0" text="2. Listar contenido filtrado" />
+            <TextField fx:id="TextFieldCadenaFiltrado" layoutX="351.0" layoutY="46.0" onAction="#ActionTextFieldCadenaFiltrado" prefHeight="25.0" prefWidth="194.0" promptText="Escribir cadena de filtrado" />
+            <RadioButton fx:id="ListarArchivosSoloLectura" layoutX="20.0" layoutY="91.0" mnemonicParsing="false" onAction="#ActionOpciones" prefHeight="17.0" prefWidth="205.0" text="3. Listar archivos de sólo lectura" />
+            <RadioButton fx:id="ListarTamaño" layoutX="20.0" layoutY="124.0" mnemonicParsing="false" onAction="#ActionOpciones" prefHeight="17.0" prefWidth="235.0" text="4.  Listar archivos filtrados por tamaño" />
+            <TextField fx:id="TextFieldArchivoBytes" layoutX="351.0" layoutY="120.0" onAction="#ActionTextFiledArchivoBytes" prefHeight="25.0" prefWidth="102.0" promptText="Archivo en Bytes" />
+            <RadioButton fx:id="ListarTamaño1" layoutX="23.0" layoutY="162.0" mnemonicParsing="false" onAction="#ActionOpciones" prefHeight="17.0" prefWidth="229.0" text="5. Crear archivo nuevo" />
+            <TextField fx:id="TextFieldNombreArchivo" layoutX="351.0" layoutY="158.0" onAction="#ActionTextFieldNombreArchivo" prefHeight="25.0" prefWidth="286.0" promptText="Nombre del archivo" />
+         </children>
+      </Pane>
+      <Button fx:id="ButtonEjecutarOpcion" layoutX="812.0" layoutY="362.0" mnemonicParsing="false" onAction="#ActionButtonEjecutarOpcion" text="Ejecutar opción" textFill="#a70202">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <TextArea fx:id="TextAreaDisplay" layoutX="30.0" layoutY="417.0" onDragDetected="#ACtionTextAreaDisplay" prefHeight="317.0" prefWidth="896.0" />
+      <Button fx:id="ButtonSalir" layoutX="849.0" layoutY="764.0" mnemonicParsing="false" onAction="#ActionButtonSalir" text="Salir" textFill="#cc0202">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
