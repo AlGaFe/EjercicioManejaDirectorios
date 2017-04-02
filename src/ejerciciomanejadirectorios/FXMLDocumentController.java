@@ -1,5 +1,7 @@
 package ejerciciomanejadirectorios;
 
+
+import Modelo.AccionesDirectorio;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -47,7 +49,7 @@ public class FXMLDocumentController implements Initializable {
     private RadioButton CrearArchivoNuevo;
     @FXML
     private Pane PaneOpciones;
-
+    private AccionesDirectorio accionesDirectorio= new AccionesDirectorio();
     private void handleButtonAction(ActionEvent event) {
 
     }
@@ -59,7 +61,7 @@ public class FXMLDocumentController implements Initializable {
         TextFieldArchivoBytes.setStyle("-fx-background-color : #D5F7B6;");
         TextFieldRuta.setStyle("-fx-background-color :#D5F7B6;");
         PaneOpciones.setStyle("-fx-border-color:#909090; -fx-border-width:1.5px; -fx-border-radius:4px;");
-
+//        TextAreaDisplay.setStyle("-fx-background-color:#000000;");
         opciones();
 
     }
@@ -84,6 +86,7 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void ActionButtonAbrir(ActionEvent event) {
+    this.TextFieldRuta.setText(accionesDirectorio.BuscquedaArchivo());
     }
 
     @FXML
@@ -104,15 +107,20 @@ public class FXMLDocumentController implements Initializable {
             
         }
         if (this.opciones.getSelectedToggle().getUserData().equals("ListarArchivosSoloLectura")) {
+            this.TextAreaDisplay.appendText(accionesDirectorio.ListarArchivosLectura()+"\n");
 
         }
         if (this.opciones.getSelectedToggle().getUserData().equals("ListarContenido")) {
+           this.TextAreaDisplay.appendText(accionesDirectorio.ListarContenidoDirectorio()+"\n");
 
         }
         if (this.opciones.getSelectedToggle().getUserData().equals("ListarFiltrado")) {
+            this.TextAreaDisplay.appendText(accionesDirectorio.ListarFiltrado(this.TextFieldCadenaFiltrado.getText())+"\n");
 
         }
         if (this.opciones.getSelectedToggle().getUserData().equals("ListarTamaño")) {
+            this.TextAreaDisplay.appendText(accionesDirectorio.ListarTamaño(this.TextFieldArchivoBytes.getText())+"\n");
+            
 
         }
 
