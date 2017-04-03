@@ -43,10 +43,10 @@ public class AccionesDirectorio {
                 
                 if(file.isDirectory()){
                     archivoDirectorio="Directorio";
-                    texto=TextoDevuelto(archivoDirectorio,file);
+                    texto+=TextoDevuelto(archivoDirectorio,file)+ "\n";
                 }else{
                     archivoDirectorio="Archivo";
-                    texto=TextoDevuelto(archivoDirectorio,file);
+                    texto+=TextoDevuelto(archivoDirectorio,file)+ "\n";
                 }
             }
        }catch (IOException ex) {
@@ -67,10 +67,10 @@ public class AccionesDirectorio {
                 if (file.getName().equalsIgnoreCase(cadenaCaracteres)) {
                     if(file.isDirectory()){
                     archivoDirectorio="Directorio";
-                    texto=TextoDevuelto(archivoDirectorio,file);
+                    texto+=TextoDevuelto(archivoDirectorio,file)+ "\n";
                     }else{
                     archivoDirectorio="Archivo";
-                    texto=TextoDevuelto(archivoDirectorio,file);
+                    texto+=TextoDevuelto(archivoDirectorio,file)+ "\n";
                 } 
                 }
             }
@@ -89,13 +89,13 @@ public class AccionesDirectorio {
             while(iterator.hasNext()){
                 Path path=iterator.next();
                 File file=path.toFile();
-                if (Files.isReadable(file.toPath())) {
+                if (Files.isReadable(file.toPath())==true && Files.isWritable(file.toPath())==false && Files.isExecutable(file.toPath())) {
                     if(file.isDirectory()){
                     archivoDirectorio="Directorio";
-                    texto=TextoDevuelto(archivoDirectorio,file);
+                    texto+=TextoDevuelto(archivoDirectorio,file)+ "\n";
                     }else{
                     archivoDirectorio="Archivo";
-                    texto=TextoDevuelto(archivoDirectorio,file);
+                    texto+=TextoDevuelto(archivoDirectorio,file)+ "\n";
                 } 
                 }
             }
@@ -108,27 +108,28 @@ public class AccionesDirectorio {
     public String ListarTamaño(String tamanoComparar){
                 String texto;
                 Long tamano;
+ 
         String archivoDirectorio;
-        texto="4. LISTAR ARCHIVOS FILTRADO POR EL TAMAÑO"+tamanoComparar+" EN: "+this.directorios.getFileName()+"\n";
+        texto="4. LISTAR ARCHIVOS FILTRADO POR EL TAMAÑO "+tamanoComparar+" EN: "+this.directorios.getFileName()+"\n";
         try(Stream<Path> ficheros = Files.list(directorios)){
             Iterator<Path>iterator=ficheros.iterator();
             while(iterator.hasNext()){
                 Path path=iterator.next();
                 File file=path.toFile();
-                tamano=file.length();
-                if (tamano.toString().equals(tamanoComparar)) {
+                tamano=Long.decode(tamanoComparar);
+                if (file.length()<=tamano) {
                     if(file.isDirectory()){
                     archivoDirectorio="Directorio";
-                    texto=TextoDevuelto(archivoDirectorio,file);
+                    texto+=TextoDevuelto(archivoDirectorio,file)+ "\n";
                     }else{
                     archivoDirectorio="Archivo";
-                    texto=TextoDevuelto(archivoDirectorio,file);
+                    texto+=TextoDevuelto(archivoDirectorio,file)+ "\n";
                 } 
                 }
             }
             
         }catch (IOException ex) {
-            texto="Error";
+            texto+="Error";
  }
         return texto;
     }
@@ -148,12 +149,37 @@ public class AccionesDirectorio {
         texto=archivoDirectorio+" "+"'"+file.getName()+"'"+" --> Tamaño: "+tamanoL.toString()+"kB --> Modificado: "+FormatearFecha(fechaHora);
         return texto;
     }
-    public void CrearNuevoArchivo(){
-        try{
-            File directorio=new File("directorio");
-            directorio.mkdir();
-        }catch(Exception ex){
-            ex.printStackTrace();
-        }
+    public String CrearNuevoArchivo(String nombreArchivo){
+        String texto;
+        String archivoDirectorio;
+            File directorio=new File(nombreArchivo);
+           texto="5. CREAR ARCHIVO "+nombreArchivo+" EN: "+this.directorios.getFileName()+"\n";
+           if(directorio.mkdir()){
+               try(Stream<Path> ficheros = Files.list(directorios)){
+            Iterator<Path>iterator=ficheros.iterator();
+            while(iterator.hasNext()){
+                Path path=iterator.next();
+                File file=path.toFile();
+                if (file.getName().equals(nombreArchivo)) {
+                    if(file.isDirectory()){
+                    archivoDirectorio="Directorio";
+                    texto+=TextoDevuelto(archivoDirectorio,file)+ "\n";
+                    }else{
+                    archivoDirectorio="Archivo";
+                    texto+=TextoDevuelto(archivoDirectorio,file)+ "\n";
+                } 
+                }
+            }
+           }catch (IOException ex) {
+            texto+="Error";
+           }
+           }else{
+               texto+="No se ha podido crear el archivo";
+           }
+    
+            
+            
+        return texto;
     }
 }
+
